@@ -35,19 +35,23 @@ public class TreeScreenController {
 	public void initialize() {
 		this.rootNode = this.tree.getRootNode();
 		this.drawingTreePane.getChildren().add(this.rootNode);
-		System.out.println(this.drawingTreePane.getWidth());
 		this.rootNode.setLayoutX(this.drawingTreePane.getPrefWidth()/2);
 	}
 	
     @FXML
     void btnAddNodePressed(ActionEvent event) {
+
     	Node parentNode = tree.searchNode(Integer.parseInt(this.tfParent.getText()));
     	Node childNode = new Node(Integer.parseInt(this.tfChild.getText()));
-    	
     	
     	parentNode.addChild(childNode);
     	this.drawingTreePane.getChildren().add(childNode);
     	this.drawingTreePane.getChildren().add(childNode.getParentLine());
     	
+    }
+    
+    @FXML
+    void btnBFSPressed(ActionEvent event) {
+    	this.tree.traversalBFS();
     }
 }
