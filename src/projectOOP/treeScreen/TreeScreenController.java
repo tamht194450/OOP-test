@@ -27,6 +27,15 @@ public class TreeScreenController {
     @FXML
     private TextField tfParent;
 
+	@FXML
+	private TextField tfDelete;
+
+	@FXML
+	private TextField tfUpdateOldValue;
+
+	@FXML
+	private TextField tfUpdateNewValue;
+
 	public TreeScreenController(GenericTree tree) {
 		super();
 		this.tree = tree;
@@ -35,19 +44,33 @@ public class TreeScreenController {
 	public void initialize() {
 		this.rootNode = this.tree.getRootNode();
 		this.drawingTreePane.getChildren().add(this.rootNode);
-		System.out.println(this.drawingTreePane.getWidth());
 		this.rootNode.setLayoutX(this.drawingTreePane.getPrefWidth()/2);
 	}
 	
     @FXML
     void btnAddNodePressed(ActionEvent event) {
-    	Node parentNode = tree.searchNode(Integer.parseInt(this.tfParent.getText()));
-    	Node childNode = new Node(Integer.parseInt(this.tfChild.getText()));
-    	
-    	
-    	parentNode.addChild(childNode);
-    	this.drawingTreePane.getChildren().add(childNode);
-    	this.drawingTreePane.getChildren().add(childNode.getParentLine());
-    	
+		if (!Node.listValue.contains(Integer.parseInt(this.tfChild.getText()))) {
+			Node parentNode = tree.searchNode(Integer.parseInt(this.tfParent.getText()));
+			Node childNode = new Node(Integer.parseInt(this.tfChild.getText()));
+
+			parentNode.addChild(childNode);
+			this.drawingTreePane.getChildren().add(childNode);
+			this.drawingTreePane.getChildren().add(childNode.getParentLine());
+		}
     }
+
+	@FXML
+	void btnDeleteNodePressed(ActionEvent event) {
+		if (Node.listValue.indexOf(Integer.parseInt(this.tfDelete.getText())) != -1) {
+			Node deleteNode = tree.searchNode(Integer.parseInt(this.tfDelete.getText()));
+			Node.listValue.remove(Node.listValue.indexOf(deleteNode.getValue()));
+			this.drawingTreePane.getChildren().remove(deleteNode.getParentLine());
+			this.drawingTreePane.getChildren().remove(deleteNode);
+		}
+	}
+
+	@FXML
+	void buttonUpdate(ActionEvent event) {
+
+	}
 }

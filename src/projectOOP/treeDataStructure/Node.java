@@ -10,15 +10,26 @@ import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 
 public class Node extends StackPane{
+	public static LinkedList<Integer> listValue = new LinkedList<>();
 	private int value;
 	private LinkedList<Node> childNodes = new LinkedList<Node>();
 	private Node parentNode;
 	private Circle circle;
 	private Text nodeValue;
 	private Line parentLine;
-	
+	private int depth = 1;
+
+	public int getDepth() {
+		return depth;
+	}
+
+	public void setDepth(int depth) {
+		this.depth = depth;
+	}
+
 	public Node(int value) {
 		this.value = value;
+		listValue.add(this.value);
 		this.setPrefSize(60, 60);
 		this.parentLine = new Line();
 		
@@ -28,8 +39,10 @@ public class Node extends StackPane{
 		
 		nodeValue = new Text(value + "");
 		this.getChildren().add(nodeValue);
+
+
 	}
-	
+
 	public void addChild(Node childNode) {
 		this.addUpdate();
 		
@@ -47,6 +60,7 @@ public class Node extends StackPane{
 		
 		this.childNodes.add(childNode);
 		childNode.setParentNode(this);
+		childNode.setDepth(this.getDepth()+1);
 	}
 	
 	public void addUpdate() {
