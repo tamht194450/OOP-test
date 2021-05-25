@@ -49,14 +49,12 @@ public class TreeScreenController {
 	
     @FXML
     void btnAddNodePressed(ActionEvent event) {
-		if (!Node.listValue.contains(Integer.parseInt(this.tfChild.getText()))) {
-			Node parentNode = tree.searchNode(Integer.parseInt(this.tfParent.getText()));
-			Node childNode = new Node(Integer.parseInt(this.tfChild.getText()));
+		Node parentNode = tree.searchNode(Integer.parseInt(this.tfParent.getText()));
+		Node childNode = new Node(Integer.parseInt(this.tfChild.getText()));
 
-			parentNode.addChild(childNode);
-			this.drawingTreePane.getChildren().add(childNode);
-			this.drawingTreePane.getChildren().add(childNode.getParentLine());
-		}
+		parentNode.addChild(childNode);
+		this.drawingTreePane.getChildren().add(childNode);
+		this.drawingTreePane.getChildren().add(childNode.getParentLine());
     }
 
 	@FXML
@@ -71,6 +69,16 @@ public class TreeScreenController {
 
 	@FXML
 	void buttonUpdate(ActionEvent event) {
+		Node parentNode = tree.searchNode(Integer.parseInt(this.tfParent.getText()));
+		Node childNode = new Node(Integer.parseInt(this.tfChild.getText()));
 
-	}
+		parentNode.addChild(childNode);
+		this.drawingTreePane.getChildren().add(childNode);
+		this.drawingTreePane.getChildren().add(childNode.getParentLine());
+    }
+    
+    @FXML
+    void btnBFSPressed(ActionEvent event) {
+    	this.tree.traversalBFS();
+    }
 }

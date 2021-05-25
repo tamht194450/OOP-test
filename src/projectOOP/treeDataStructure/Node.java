@@ -2,6 +2,7 @@ package projectOOP.treeDataStructure;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.concurrent.TimeUnit;
 
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -114,6 +115,10 @@ public class Node extends StackPane{
 
 	private void setParentNode(Node parentNode) {
 		this.parentNode = parentNode;
+	}
+
+	public Circle getCircle() {
+		return circle;
 	}
 	
 
